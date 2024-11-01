@@ -6,7 +6,7 @@
 #include <SOIL2/SOIL2.h> // Inclua a biblioteca SOIL2 para carregar texturas
 #include "LoadedObject.hpp" // Inclua seu header LoadedObject
 
-// Vari·veis globais
+// Vari√°veis globais
 HDC hdc;
 HGLRC hglrc;
 HWND hwnd;
@@ -18,19 +18,19 @@ float cubePositionZ = -5.0f;
 bool mouseDown = false;
 POINT lastMousePos;
 
-LoadedObject loadedModel; // Inst‚ncia do seu modelo carregado
+LoadedObject loadedModel; // Inst√¢ncia do seu modelo carregado
 GLuint textureID; // ID da textura
 
-// Prototipos de funÁıes
+// Prototipos de fun√ß√µes
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 void InitOpenGL();
 void RenderScene();
 void ResizeGLScene(int width, int height);
-void Update(); // Adicione um protÛtipo para a funÁ„o de atualizaÁ„o
-GLuint LoadTexture(const char* filename); // Prototipo da funÁ„o para carregar texturas
+void Update(); // Adicione um prot√≥tipo para a fun√ß√£o de atualiza√ß√£o
+GLuint LoadTexture(const char* filename); // Prototipo da fun√ß√£o para carregar texturas
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
-	// CriaÁ„o da janela
+	// Cria√ß√£o da janela
 	WNDCLASS wc = {};
 	wc.lpfnWndProc = WindowProc;
 	wc.hInstance = hInstance;
@@ -46,7 +46,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	std::string dir = "E:\\Flyff\\Flyff Programming Area\\Flyff Mocomochi\\Source Flyff Mocomochi\\FlyFF_Mocomochi\\Model\\";
 	std::string model = dir + "mvr_AiBatt.o3d";
 
-	// Carregue o modelo 3D aqui
+	// Carrega o modelo 3D.
 	if (loadedModel.LoadObject(model.c_str()))
 	{
 		std::string texture = dir + "\\Texture\\" + loadedModel.getTextureName();
@@ -60,7 +60,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		std::cerr << "Erro ao carregar o modelo." << std::endl;
 	}
-	// Loop principal da mensagem
+	
 	MSG msg;
 	while (GetMessage(&msg, nullptr, 0, 0)) {
 		TranslateMessage(&msg);
@@ -77,8 +77,8 @@ void InitOpenGL() {
 	pfd.nVersion = 1;
 	pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
 	pfd.iPixelType = PFD_TYPE_RGBA;
-	pfd.cColorBits = 32; // N˙mero de bits de cor
-	pfd.cDepthBits = 24; // Adicione o buffer de profundidade
+	pfd.cColorBits = 32; 
+	pfd.cDepthBits = 24;
 	pfd.iLayerType = PFD_MAIN_PLANE;
 
 	int pixelFormat = ChoosePixelFormat(hdc, &pfd);
@@ -116,7 +116,7 @@ GLuint LoadTexture(const char* filename) {
 		return 0; // Retorna 0 em caso de erro
 	}
 
-	// Define os par‚metros da textura
+	// Define os par√¢metros da textura
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -208,13 +208,13 @@ void RenderScene() {
 
     // Habilita a textura
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, textureID); // VÌnculo da textura
+    glBindTexture(GL_TEXTURE_2D, textureID); // V√≠nculo da textura
 
     // Renderize o modelo carregado
     glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, loadedModel.getVertexData()); // Defina os dados do vÈrtice
+    glVertexPointer(3, GL_FLOAT, 0, loadedModel.getVertexData()); // Defina os dados do v√©rtice
 
-    // Se as coordenadas de textura estiverem disponÌveis, ative e defina
+    // Se as coordenadas de textura estiverem dispon√≠veis, ative e defina
    if (loadedModel.getVertexUVCount() > 0) {
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         glTexCoordPointer(2, GL_FLOAT, 0, loadedModel.getVertexUVData()); // Use getUvs para obter os dados das coordenadas UV
@@ -243,8 +243,8 @@ void RenderScene() {
 }
 
 void Update() {
-	// Atualize a cena se necess·rio (ex.: animaÁıes)
-	InvalidateRect(hwnd, nullptr, TRUE); // ForÁa a atualizaÁ„o da janela
+	// Atualize a cena se necess√°rio (ex.: anima√ß√µes)
+	InvalidateRect(hwnd, nullptr, TRUE); // For√ßa a atualiza√ß√£o da janela
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -254,7 +254,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 		break;
 	case WM_PAINT:
 		RenderScene();
-		Update(); // Chame a funÁ„o de atualizaÁ„o aqui
+		Update(); // Chame a fun√ß√£o de atualiza√ß√£o aqui
 		break;
 	case WM_LBUTTONDOWN:
 		mouseDown = true;
